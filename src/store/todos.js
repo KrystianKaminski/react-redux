@@ -1,9 +1,10 @@
 const ADD_TODO = 'ADD_TODO'
 const FILTER_TODO = 'FILTER_TODO'
+const TOGGLE_TODO = 'TOGGLE_TODO'
 
 const INITIAL_STATE = {
     allTodos: [],
-    filteredTodos: []
+    visibleTodos: []
 }
 
 export const addTodo = text => ({
@@ -14,6 +15,11 @@ export const addTodo = text => ({
 export const filterTodos = text => ({
     type: FILTER_TODO,
     input: text
+})
+
+export const toggleTodo = index => ({
+    type: TOGGLE_TODO,
+    index
 })
 
 
@@ -36,8 +42,22 @@ export default (state = INITIAL_STATE, action) => {
         case FILTER_TODO: 
             return {
                 ...state,
-                filteredTodos: state.allTodos.filter(todo =>
+                visibleTodos: state.allTodos.filter(todo =>
                         todo.text.includes(action.input)),
+            }
+
+        case TOGGLE_TODO:
+            return {
+                ...state,
+                allTodos: state.allTodos.map((todo, index) => {
+                    if (index === action.index) {
+                         return {
+                             ...todo,
+                             completed: !todo.completed
+                         }
+                    }
+                    return todo
+                })
             }
         default:
             return state

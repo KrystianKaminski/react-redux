@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 
 // REDUCERS IMPORT
-import todos, { addTodo, filterTodos } from './store/todos'
+import todos, { addTodo, filterTodos, toggleTodo } from './store/todos'
 import counter, {increment, decrement, reset} from './store/counter'
 import cart, {addToCart} from './store/cart'
 
@@ -29,6 +29,7 @@ const store = createStore(
 
 
 
+
 window.increaseCounter = () => store.dispatch(increment())
 window.decreaseCounter = () => store.dispatch(decrement())
 window.reset = () => store.dispatch(reset())
@@ -37,6 +38,7 @@ window.addToCart = (title, price) => store.dispatch(addToCart(title, price))
 
 window.addTodo = (text) => store.dispatch(addTodo(text))
 window.filterTodos = (text) => store.dispatch(filterTodos(text))
+window.toggleTodo = index => store.dispatch(toggleTodo(index))
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
