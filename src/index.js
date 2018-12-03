@@ -4,12 +4,15 @@ import { createStore, combineReducers } from 'redux'
 import './index.css';
 import App from './App';
 
+// REDUCERS IMPORT
 import todos, { addTodo } from './store/todos'
+import counter from './store/counter'
 
-// REDUX STUFF GOES HERE
+// REDUX CONFIG GOES HERE
 
 const rootReducer = combineReducers({
-    todos
+    todos,
+    counter
 })
 const store = createStore(
     rootReducer,
@@ -17,7 +20,7 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-// REDUX STUFF END
+// REDUX CONFIG END
 
 
 store.dispatch(addTodo('Go shopping!'))
