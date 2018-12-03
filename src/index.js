@@ -6,7 +6,7 @@ import App from './App';
 
 // REDUCERS IMPORT
 import todos, { addTodo } from './store/todos'
-import counter, {increment, decrement} from './store/counter'
+import counter, {increment, decrement, reset} from './store/counter'
 
 // REDUX CONFIG GOES HERE
 
@@ -38,6 +38,7 @@ store.dispatch(decrement())
 
 window.increaseCounter = () => store.dispatch(increment())
 window.decreaseCounter = () => store.dispatch(decrement())
+window.reset = () => store.dispatch(reset())
 
 window.addTodo = (text) => store.dispatch(addTodo(text))
 
