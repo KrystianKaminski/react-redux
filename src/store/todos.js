@@ -16,6 +16,15 @@ export default (state = [], action) => {
 
             }
             return [...state, newTodo]
+        // case 'SWITCH_TODO_COMPLETED':
+        //     return [
+        //         ...state.slice(0, action.index),
+        //         {
+        //             text: state[index].text,
+        //             completed: !state[action.index].completed
+        //         },
+        //         ...state.slice(action.index + 1),
+        //     ]
 
         default:
             return state
