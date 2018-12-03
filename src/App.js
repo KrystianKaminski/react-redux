@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
-const App =() => (
-  <div>
-    Hello
-  </div>
-)
+class App extends React.Component {
+
+  render() {
+    return 'Hi redux!'
+  }
+}
 
 export default App;
