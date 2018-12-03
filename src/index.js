@@ -18,6 +18,8 @@ const store = createStore(rootReducer)
 console.warn(store.getState())
 
 store.dispatch(addTodo('Go shopping!'))
+store.dispatch(addTodo('Other thing'))
+store.dispatch(addTodo('Another thing!'))
 
 console.warn(store.getState())
 
