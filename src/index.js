@@ -33,5 +33,9 @@ store.dispatch(increment())
 store.dispatch(increment())
 
 
+window.increaseCounter = () => store.dispatch(increment())
+
+window.addTodo = (text) => store.dispatch(addTodo(text))
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
