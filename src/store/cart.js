@@ -18,7 +18,7 @@ export const addToCart = (title, price) => ({
 
 
 
-export default (state = [], action) => {
+export default (state = INITIAL_STATE, action) => {
 
     switch(action.type) {
         case ADD_CART:
