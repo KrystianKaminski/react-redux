@@ -4,9 +4,15 @@ import { createStore, combineReducers } from 'redux'
 import './index.css';
 import App from './App';
 
-// REDUX GOES HERE
+import todos from './store'
 
-const rootReducer = combineReducers()
-const store = createStore(() => {})
+// REDUX STUFF GOES HERE
+
+const rootReducer = combineReducers({
+    todos
+})
+const store = createStore(rootReducer)
+
+// REDUX STUFF END
 
 ReactDOM.render(<App />, document.getElementById('root'));
