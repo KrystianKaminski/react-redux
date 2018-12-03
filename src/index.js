@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 
 // REDUCERS IMPORT
-import todos, { addTodo, filterTodos, toggleTodo } from './store/todos'
+import todos, { addTodo, filterTodos, toggleTodo, deleteTodo } from './store/todos'
 import counter, {increment, decrement, reset} from './store/counter'
 import cart, {addToCart} from './store/cart'
 
@@ -39,6 +39,7 @@ window.addToCart = (title, price) => store.dispatch(addToCart(title, price))
 window.addTodo = (text) => store.dispatch(addTodo(text))
 window.filterTodos = (text) => store.dispatch(filterTodos(text))
 window.toggleTodo = index => store.dispatch(toggleTodo(index))
+window.deleteTodo = index => store.dispatch(deleteTodo(index))
 
 
 ReactDOM.render(<App />, document.getElementById('root'));

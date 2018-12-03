@@ -1,6 +1,7 @@
 const ADD_TODO = 'ADD_TODO'
 const FILTER_TODO = 'FILTER_TODO'
 const TOGGLE_TODO = 'TOGGLE_TODO'
+const DELETE_TODO = 'DELETE_TODO'
 
 const INITIAL_STATE = {
     allTodos: [],
@@ -19,6 +20,11 @@ export const filterTodos = text => ({
 
 export const toggleTodo = index => ({
     type: TOGGLE_TODO,
+    index
+})
+
+export const deleteTodo = index => ({
+    type: DELETE_TODO,
     index
 })
 
@@ -58,6 +64,12 @@ export default (state = INITIAL_STATE, action) => {
                     }
                     return todo
                 })
+            }
+
+        case DELETE_TODO:
+            return {
+                ...state,
+                allTodos: state.allTodos.filter((todo, index) => (index !== action.index))
             }
         default:
             return state
