@@ -7,13 +7,16 @@ import App from './App';
 // REDUCERS IMPORT
 import todos, { addTodo } from './store/todos'
 import counter, {increment, decrement, reset} from './store/counter'
+import cart, {addPrice} from './store/cart'
 
 // REDUX CONFIG GOES HERE
 
 const rootReducer = combineReducers({
     todos,
-    counter
+    counter,
+    cart
 })
+
 const store = createStore(
     rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ &&
@@ -34,6 +37,9 @@ store.dispatch(increment())
 
 store.dispatch(decrement())
 store.dispatch(decrement())
+
+store.dispatch(addPrice(20))
+store.dispatch(addPrice(20))
 
 
 window.increaseCounter = () => store.dispatch(increment())
