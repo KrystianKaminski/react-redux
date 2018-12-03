@@ -1,22 +1,23 @@
-const INITIAL_STATE = {
-    cartTotal: 0
-}
+
 
 const ADD_CART = 'ADD_CART'
 
 
-export const addPrice = price => ({
+export const addToCart = (title, price) => ({
     type: ADD_CART,
-    price
+    item: {
+        title,
+        price
+    }
 })
 
 
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = [], action) => {
 
     switch(action.type) {
         case ADD_CART:
-            return {cartTotal: state.cartTotal + action.price}
+           return [...state, action.item]
         default:
             return state
     }

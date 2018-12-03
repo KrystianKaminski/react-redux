@@ -7,7 +7,7 @@ import App from './App';
 // REDUCERS IMPORT
 import todos, { addTodo } from './store/todos'
 import counter, {increment, decrement, reset} from './store/counter'
-import cart, {addPrice} from './store/cart'
+import cart, {addToCart} from './store/cart'
 
 // REDUX CONFIG GOES HERE
 
@@ -38,13 +38,13 @@ store.dispatch(increment())
 store.dispatch(decrement())
 store.dispatch(decrement())
 
-store.dispatch(addPrice(20))
-store.dispatch(addPrice(20))
 
 
 window.increaseCounter = () => store.dispatch(increment())
 window.decreaseCounter = () => store.dispatch(decrement())
 window.reset = () => store.dispatch(reset())
+window.addToCart = (title, price) => store.dispatch(addToCart(title, price))
+
 
 window.addTodo = (text) => store.dispatch(addTodo(text))
 
