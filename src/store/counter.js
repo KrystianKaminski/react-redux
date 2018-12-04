@@ -23,6 +23,6 @@ export default (state = 0, action) => {
         case RESET:
             return 0
         default:
-            return state
+            return 0
     }
 }

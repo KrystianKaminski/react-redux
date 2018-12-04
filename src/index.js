@@ -31,6 +31,8 @@ store.dispatch(addTodo('Buy smth else'));
 store.dispatch(addTodo('Do smth else'));
 
 
+
+
 window.increaseCounter = () => store.dispatch(increment());
 window.addTodoItem = (text) => store.dispatch(addTodo(text));
 window.filterTodos = text => store.dispatch(filterTodos(text))
