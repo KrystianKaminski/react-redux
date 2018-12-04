@@ -31,60 +31,48 @@ export const deleteTodo = index => ({
 
 
 export default (state = INITIAL_STATE, action) => {
-
+    console.log('todos reducer received action', action);
     switch (action.type) {
-        case ADD_TODO:
-            const newTodo = {
-                text: action.text,
-                completed: false
-
-            }
-            const newVisibleTodos =
-                newTodo.text.includes(state.filter)
-                    ? [...state.visibleTodos, newTodo]
-                    : state.visibleTodos
-            //return [...state, newTodo]
-
-            return {
-                ...state,
-                allTodos: [...state.allTodos, newTodo],
-                visibleTodos: newVisibleTodos
-            }
-
-        case FILTER_TODO:
-            return {
-                ...state,
-                filter: action.input,
-                visibleTodos: getVisibleTodos(state, action)
-            }
-
-        case TOGGLE_TODO:
-            return {
-                ...state,
-                allTodos: state.allTodos.map((todo, index) => {
-                    if (index === action.index) {
-                        return {
-                            ...todo,
-                            completed: !todo.completed
-                        }
-                    }
-                    return todo
-                }),
-                visibleTodos: getVisibleTodos(state, action)
-            }
-
-        case DELETE_TODO:
-            return {
-                ...state,
-                allTodos: state.allTodos.filter((todo, index) => (index !== action.index)),
-                visibleTodos: getVisibleTodos(state, action)
-            }
-        default:
-            return state
+      case ADD_TODO:
+        const newTodo = { text: action.text, completed: false };
+        const newVisibleTodos =
+          newTodo.text.includes(state.filter)
+            ? [...state.visibleTodos, newTodo]
+            : state.visibleTodos;
+        return {
+          ...state,
+          allTodos: [...state.allTodos, newTodo],
+          visibleTodos: newVisibleTodos
+        };
+      case FILTER_TODO:
+        return {
+          ...state,
+          filter: action.input,
+          visibleTodos: getVisibleTodos(state.allTodos, action.input)
+        }
+      case TOGGLE_TODO:
+        const allTodosWithToggled = state.allTodos.map((todo, index) => (index === action.index)
+          ? { ...todo, completed: !todo.completed }
+          : todo
+        );
+        return {
+          ...state,
+          allTodos: allTodosWithToggled,
+          visibleTodos: getVisibleTodos(allTodosWithToggled, state.filter)
+        }
+      case DELETE_TODO:
+        const allTodosWithDeleted = state.allTodos.filter((todo, index) => !(index === action.index));
+        return {
+          ...state,
+          allTodos: allTodosWithDeleted,
+          visibleTodos: getVisibleTodos(allTodosWithDeleted, state.filter)
+        }
+      default:
+        return state;
     }
-}
-
-function getVisibleTodos(state, action) {
-    return state.allTodos.filter(todo =>
-        todo.text.includes(state.filter))
-}
+  }
+  
+  function getVisibleTodos(allTodos, filter) {
+    return allTodos.filter(
+      todo => todo.text.includes(filter));
+  }
