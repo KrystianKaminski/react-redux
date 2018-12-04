@@ -1,22 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { addTodo, toggleTodo, deleteTodo } from './store/todos'
+
+import { addTodo, toggleTodo, deleteTodo, filterTodos } from './store/todos'
 
 const mapStateToProps = store => ({
-    _todos: store.todos.allTodos
+    _todos: store.todos.visibleTodos
 })
 
 const mapDispatchToProps = dispatch => ({
     _addTodo: text => dispatch(addTodo(text)),
     _toggleTodo: index => dispatch(toggleTodo(index)),
-    _deleteTodo: index => dispatch(deleteTodo(index))
+    _deleteTodo: index => dispatch(deleteTodo(index)),
+    _filterTodo: filteredText => dispatch(filterTodos(filteredText))
 })
 
 class TodoList extends React.Component {
 
 
-    state = { value: '' }
+    state = { 
+        value: '',
+        searchValue: ''
+    }
 
     handleInputChange = event => {
         this.setState({ value: event.target.value })
@@ -37,8 +42,11 @@ class TodoList extends React.Component {
 
     render() {
         console.log('TodoList props', this.props)
-        return <div>
+        return <div
+            className="todo"
+        >
             {this.renderInput()}
+            {this.renderSearchInput()}
             {this.renderList()}
         </div>
 
@@ -46,6 +54,7 @@ class TodoList extends React.Component {
 
     renderInput() {
         return <div>
+            <h2>Add todos</h2>
             <input onChange={this.handleInputChange} />
             <button onClick={this.handleButtonClick}>Add todo</button>
         </div>
@@ -69,6 +78,23 @@ class TodoList extends React.Component {
                 >X</button>
             </div>
         )
+    }
+
+    renderSearchInput() {
+        return <div>
+            <h2>Search todos</h2>
+            <input onChange={this.handleSearchInputChange} />
+            <button onClick={this.handleSearchButtonClick}>Search todo</button>
+        </div>
+    }
+
+    handleSearchInputChange = (e) => {
+        this.setState({searchValue: e.target.value})
+
+    }
+
+    handleSearchButtonClick = () => {
+        this.props._filterTodo(this.state.searchValue)
     }
 }
 
