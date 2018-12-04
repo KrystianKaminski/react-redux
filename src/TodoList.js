@@ -3,6 +3,10 @@ import { connect } from 'react-redux'
 
 import { addTodo } from './store/todos'
 
+const mapStateToProps = store => ({
+    todos: store.todos.allTodos
+})
+
 const mapDispatchToProps = dispatch => ({
     addTodo: text => dispatch(addTodo(text))
 })
@@ -33,4 +37,4 @@ class TodoList extends React.Component {
     }
 }
 
-export default connect(null, mapDispatchToProps)(TodoList)
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
