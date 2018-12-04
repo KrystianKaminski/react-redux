@@ -38,27 +38,37 @@ class TodoList extends React.Component {
     render() {
         console.log('TodoList props', this.props)
         return <div>
-            <input onChange={this.handleInputChange} />
-            <button onClick={this.handleButtonClick}>Add todo</button>
-            {this.props._todos.map((todo, index) =>
-                <div
-                    style={{
-                        textDecoration: todo.completed ? 'line-through' : 'none'
-                    }}
-                    onClick={() => this.handleTodoClick(index)}
-                    key={todo.text}>
-                    <div>
-                        {todo.text}
-
-                    </div>
-                    <button
-                        type="button"
-                        onClick={() => this.handleDeleteClick(index)}
-                        >X</button>
-                </div>
-            )}
+            {this.renderInput()}
+            {this.renderList()}
         </div>
 
+    }
+
+    renderInput() {
+        return <div>
+            <input onChange={this.handleInputChange} />
+            <button onClick={this.handleButtonClick}>Add todo</button>
+        </div>
+    }
+
+    renderList() {
+        return this.props._todos.map((todo, index) =>
+            <div
+                style={{
+                    textDecoration: todo.completed ? 'line-through' : 'none'
+                }}
+                onClick={() => this.handleTodoClick(index)}
+                key={todo.text}>
+                <div>
+                    {todo.text}
+
+                </div>
+                <button
+                    type="button"
+                    onClick={() => this.handleDeleteClick(index)}
+                >X</button>
+            </div>
+        )
     }
 }
 
