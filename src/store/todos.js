@@ -5,7 +5,8 @@ const DELETE_TODO = 'DELETE_TODO'
 
 const INITIAL_STATE = {
     allTodos: [],
-    visibleTodos: []
+    visibleTodos: [],
+    filter: ''
 }
 
 export const addTodo = text => ({
@@ -38,16 +39,22 @@ export default (state = INITIAL_STATE, action) => {
                 completed: false
 
             }
+            const newVisibleTodos = 
+                newTodo.text.includes(state.filter)
+                ? [...state.visibleTodos, newTodo]
+                : state.visibleTodos
             //return [...state, newTodo]
 
             return {
                 ...state,
-                allTodos: [...state.allTodos, newTodo]
+                allTodos: [...state.allTodos, newTodo],
+                visibleTodos: newVisibleTodos
             }
 
         case FILTER_TODO: 
             return {
                 ...state,
+                filter: action.input,
                 visibleTodos: state.allTodos.filter(todo =>
                         todo.text.includes(action.input)),
             }
