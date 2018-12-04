@@ -25,7 +25,20 @@ const store = createStore(
 )
 
 // REDUX CONFIG END
+store.dispatch(addTodo('Buy food'));
+store.dispatch(addTodo('Clean home'));
+store.dispatch(addTodo('Buy smth else'));
+store.dispatch(addTodo('Do smth else'));
 
+
+window.increaseCounter = () => store.dispatch(increment());
+window.addTodoItem = (text) => store.dispatch(addTodo(text));
+window.filterTodos = text => store.dispatch(filterTodos(text))
+window.toggleTodo = index => store.dispatch(toggleTodo(index))
+window.deleteTodo = index => store.dispatch(deleteTodo(index))
+
+// here
+window.addToCart = (title, price) => store.dispatch(addToCart(title, price));
 
 
 

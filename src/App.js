@@ -4,7 +4,8 @@ import TodoList from './TodoList';
 
 
 const mapStateToProps = state => ({
-  todos: state.todos.allTodos
+  todos: state.todos.allTodos,
+  visibleTodos: state.todos.visibleTodos
 })
 
 class App extends React.Component {
