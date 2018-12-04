@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { addTodo, toggleTodo } from './store/todos'
+import { addTodo, toggleTodo, deleteTodo } from './store/todos'
 
 const mapStateToProps = store => ({
     _todos: store.todos.allTodos
@@ -9,7 +9,8 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
     _addTodo: text => dispatch(addTodo(text)),
-    _toggleTodo: index => dispatch(toggleTodo(index))
+    _toggleTodo: index => dispatch(toggleTodo(index)),
+    _deleteTodo: index => dispatch(deleteTodo(index))
 })
 
 class TodoList extends React.Component {
@@ -30,6 +31,10 @@ class TodoList extends React.Component {
         this.props._toggleTodo(index)
     }
 
+    handleDeleteClick = index => {
+        this.props._deleteTodo(index)
+    }
+
     render() {
         console.log('TodoList props', this.props)
         return <div>
@@ -42,7 +47,14 @@ class TodoList extends React.Component {
                     }}
                     onClick={() => this.handleTodoClick(index)}
                     key={todo.text}>
-                    {todo.text}
+                    <div>
+                        {todo.text}
+
+                    </div>
+                    <button
+                        type="button"
+                        onClick={() => this.handleDeleteClick(index)}
+                        >X</button>
                 </div>
             )}
         </div>
