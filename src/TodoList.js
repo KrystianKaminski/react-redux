@@ -8,6 +8,7 @@ class TodoList extends React.Component {
                 <div>{todo.text}</div>
             )}
         </div>
+        
     }
 }
 
